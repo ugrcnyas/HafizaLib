@@ -1,0 +1,19 @@
+//Üye giris:
+if($_POST)
+{
+
+    $isim=$_POST['isim'];
+    $pass=$_POST['pass'];
+    $sql=$bagla->prepare("SELECT * FROM deneme WHERE isim=? AND pass=?");
+    $sql->execute(array($isim,$pass));
+    $dizi=$sql->fetch();
+    if($dizi)
+    {
+        echo " Giris Yapıldı $isim";
+    }
+    else {
+        
+        echo " giris başarısız";
+    }
+}
+?>

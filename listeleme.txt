@@ -1,0 +1,42 @@
+<?php
+error_reporting(0);
+    $host = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "test";
+
+
+    //Yukarıda belirtilen veritabanına bağlan. Her iki halde veritabanı olacak. Ya önceden vardı ya da yeni oluşturuldu.
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    if($_POST['sil'])
+    {
+    $degisken = $_POST['sil'];
+    }
+    if($_POST)
+    {
+    //prepare methodu ile insert sorgumuzu yazıyoruz fakat değerler yerine gerçek değerleri yazmıyoruz
+    $stmt=$conn->prepare("DELETE FROM deneme WHERE id=:id");
+    $result=$stmt->execute([
+        ":id" => $degisken
+    ]);
+
+    echo "İşlem başarıyla gerçekleştirildi";
+    }
+?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<form action="" method="post">
+    <input type="text" name="sil">
+    <input type="submit" name="gonder"> 
+</form>
+</body>
+</html>

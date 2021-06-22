@@ -1,0 +1,39 @@
+<?php
+
+
+
+$db=new PDO("mysql:host=localhost;dbname=veri;charset=utf8;","root","");
+if($db)
+{
+    echo "baglı";
+}
+
+if($_POST)
+{
+    $isim=$_POST['isim'];
+    $pass=$_POST['pass'];
+        
+
+  if(!$isim)
+  {
+      echo " boş bırakmayın";
+  }
+  else {
+      $kaydet=$db->prepare("INSERT INTO deneme SET isim='$isim',pass='$pass'");
+      $kaydet->execute(array($isim,$pass));
+   
+  }
+}
+?>
+<html>
+    
+<body>
+    <form action="" method="POST">
+        <input type="text" name="isim">
+        <input type="text" name="pass">
+        <input type="submit" value="Gonder">
+
+
+    
+</body>
+</html>
